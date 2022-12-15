@@ -104,15 +104,13 @@ export class Num {
 
 
   /**
-   * Normalize a value within a range.
+   * Normalize a value within a range(inverse lerp).
    * @param n the value to normalize
-   * @param a range value 1
+   * @param a range value 0
    * @param b range value 1
    */
   static normalizeValue(n:number, a:number, b:number):number {
-    let min = Math.min(a, b);
-    let max = Math.max(a, b);
-    return (n - min) / (max - min);
+    return (n - a) / (b - a);
   }
 
 
@@ -164,9 +162,7 @@ export class Num {
    */
   static mapToRange(n:number, currA:number, currB:number, targetA:number, targetB:number) {
     if (currA == currB) throw new Error("[currMin, currMax] must define a range that is not zero");
-    let min = Math.min(targetA, targetB);
-    let max = Math.max(targetA, targetB);
-    return Num.normalizeValue(n, currA, currB) * (max - min) + min;
+    return Num.normalizeValue(n, currA, currB) * (targetB - targetA) + targetA;
   }
 
   /**

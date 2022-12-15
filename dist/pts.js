@@ -1441,9 +1441,7 @@ See https://github.com/williamngan/pts for details. */
       return p;
     }
     static normalizeValue(n, a, b) {
-      let min = Math.min(a, b);
-      let max = Math.max(a, b);
-      return (n - min) / (max - min);
+      return (n - a) / (b - a);
     }
     static sum(pts) {
       let _pts = Util.iterToArray(pts);
@@ -1463,9 +1461,7 @@ See https://github.com/williamngan/pts for details. */
     static mapToRange(n, currA, currB, targetA, targetB) {
       if (currA == currB)
         throw new Error("[currMin, currMax] must define a range that is not zero");
-      let min = Math.min(targetA, targetB);
-      let max = Math.max(targetA, targetB);
-      return Num.normalizeValue(n, currA, currB) * (max - min) + min;
+      return Num.normalizeValue(n, currA, currB) * (targetB - targetA) + targetA;
     }
     static seed(seed) {
       this.generator = uheprng_default(seed);
@@ -3715,12 +3711,6 @@ See https://github.com/williamngan/pts for details. */
         this._offCanvas.width = Math.ceil(this.bound.size.x) * this._pixelScale;
         this._offCanvas.height = Math.ceil(this.bound.size.y) * this._pixelScale;
       }
-      if (this._pixelScale != 1) {
-        this._ctx.scale(this._pixelScale, this._pixelScale);
-        if (this._offscreen) {
-          this._offCtx.scale(this._pixelScale, this._pixelScale);
-        }
-      }
       for (let k in this.players) {
         if (this.players.hasOwnProperty(k)) {
           let p = this.players[k];
@@ -3751,6 +3741,15 @@ See https://github.com/williamngan/pts for details. */
     }
     get pixelScale() {
       return this._pixelScale;
+    }
+    get width() {
+      return this._canvas.width;
+    }
+    get height() {
+      return this._canvas.height;
+    }
+    get size() {
+      return new Pt([this.width, this.height]);
     }
     get hasOffscreen() {
       return this._offscreen;

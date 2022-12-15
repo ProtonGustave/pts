@@ -5,7 +5,7 @@
   "main": "./dist/index",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "start": "tsup --config tsup.browser.js --watch",
+    "start": "tsup --config tsup.module.js --watch",
     "build": "npm run build-module && npm run build-browser",
     "build-module": "tsup --config tsup.module.js",
     "build-browser": "tsup --config tsup.browser.js && tsup --config tsup.min.js",

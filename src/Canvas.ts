@@ -205,13 +205,13 @@ export class CanvasSpace extends MultiTouchSpace {
       // this._offCanvas.style.height = Math.floor(this.bound.size.y) + "px";
     }
     
-    if (this._pixelScale != 1) {
-      this._ctx.scale( this._pixelScale, this._pixelScale );
-      
-      if (this._offscreen) {
-        this._offCtx.scale( this._pixelScale, this._pixelScale );
-      }
-    }
+    // if (this._pixelScale != 1) {
+    //   this._ctx.scale( this._pixelScale, this._pixelScale );
+    //   
+    //   if (this._offscreen) {
+    //     this._offCtx.scale( this._pixelScale, this._pixelScale );
+    //   }
+    // }
     
     for (let k in this.players) {
       if (this.players.hasOwnProperty(k)) {
@@ -261,8 +261,22 @@ export class CanvasSpace extends MultiTouchSpace {
   public get pixelScale():number {
     return this._pixelScale;
   }
+
+  public get width(): number {
+    return this._canvas.width;
+  }
+
+  public get height(): number {
+    return this._canvas.height;
+  }
+
+  get size():Pt { return new Pt([this.width, this.height]) };
   
-  
+  /**
+  * The center of this space's bounding box.
+  */
+  // get center():Pt { return this.size.divide(2); }
+
   /**
   * Check if an offscreen canvas is created
   */

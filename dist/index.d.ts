@@ -600,6 +600,9 @@ declare class CanvasSpace extends MultiTouchSpace {
     set background(bg: string);
     get background(): string;
     get pixelScale(): number;
+    get width(): number;
+    get height(): number;
+    get size(): Pt;
     get hasOffscreen(): boolean;
     get offscreenCtx(): PtsCanvasRenderingContext2D;
     get offscreenCanvas(): HTMLCanvasElement;
