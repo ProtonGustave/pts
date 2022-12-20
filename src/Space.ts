@@ -487,6 +487,11 @@ export abstract class MultiTouchSpace extends Space {
       }
     }
     if (type) {
+      if ("_pixelScale" in this) {
+        px *= (this as { _pixelScale: number })._pixelScale;
+        py *= (this as { _pixelScale: number })._pixelScale;
+      }
+
       this._pointer.to( px, py );
       this._pointer.id = type;
     }

@@ -3171,6 +3171,10 @@ var MultiTouchSpace = class extends Space {
       }
     }
     if (type) {
+      if ("_pixelScale" in this) {
+        px *= this._pixelScale;
+        py *= this._pixelScale;
+      }
       this._pointer.to(px, py);
       this._pointer.id = type;
     }
@@ -4125,6 +4129,19 @@ var CanvasForm = class extends VisualForm {
   }
   polygon(pts) {
     CanvasForm.polygon(this._ctx, pts);
+    this._paint();
+    return this;
+  }
+  static roundRect(ctx, pts, radii) {
+    let p = Util.iterToArray(pts);
+    if (!Util.arrayCheck(p))
+      return;
+    ctx.beginPath();
+    ctx.roundRect(p[0][0], p[0][1], p[1][0] - p[0][0], p[1][1] - p[0][1], radii);
+    ctx.closePath();
+  }
+  roundRect(pts, radii) {
+    CanvasForm.roundRect(this._ctx, pts, radii);
     this._paint();
     return this;
   }

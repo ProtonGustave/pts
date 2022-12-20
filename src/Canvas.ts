@@ -1015,7 +1015,20 @@ export class CanvasForm extends VisualForm {
       this._paint();
       return this;
     }
-    
+
+    static roundRect( ctx:CanvasRenderingContext2D, pts:PtLikeIterable, radii: number) {
+      let p = Util.iterToArray( pts );
+      if ( !Util.arrayCheck(p) ) return;
+      ctx.beginPath();
+      ctx.roundRect(p[0][0], p[0][1], p[1][0] - p[0][0], p[1][1] - p[0][1], radii);
+      ctx.closePath();
+    }
+
+    roundRect( pts:PtLikeIterable, radii: number ):this {
+      CanvasForm.roundRect( this._ctx, pts, radii );
+      this._paint();
+      return this;
+    }
     
     /**
     * A static function to draw a rectangle.
