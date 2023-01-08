@@ -207,7 +207,7 @@ export class CanvasSpace extends MultiTouchSpace {
     
     // if (this._pixelScale != 1) {
     //   this._ctx.scale( this._pixelScale, this._pixelScale );
-    //   
+    //
     //   if (this._offscreen) {
     //     this._offCtx.scale( this._pixelScale, this._pixelScale );
     //   }

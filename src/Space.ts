@@ -469,8 +469,8 @@ export abstract class MultiTouchSpace extends Space {
       for (let k in this.players) {
         if (this.players.hasOwnProperty(k)) {
           let v = this.players[k];
-          px = evt.pageX - this.outerBound.x;
-          py = evt.pageY - this.outerBound.y;
+          px = evt.offsetX;
+          py = evt.offsetY;
           if (v.action) v.action( type, px, py, evt );
         }
       }
